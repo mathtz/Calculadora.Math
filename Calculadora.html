@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculadora</title>
+    <link rel="stylesheet" href="calculadora.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+    />
+  </head>
+  <body>
+
+    <h1>Calculadora</h1>
+
+      <div id="calculadora">
+        <div id="resposta"></div>
+        <div id="simbolos">
+          
+            <div id="operador" class="icone" onclick="clicarOP('+')">+</div>
+            <div id="operador" class="icone" onclick="clicarOP('-')">-</div>
+            <div id="operador" class="icone" onclick="clicarOP('X')">X</div>
+            <div id="operador" class="icone" onclick="clicarOP('÷')">÷</i></div>
+          
+            <div id="numero" class="icone" onclick="clicarNUM('6')">6</div>
+            <div id="numero" class="icone" onclick="clicarNUM('7')">7</div>
+            <div id="numero" class="icone" onclick="clicarNUM('8')">8</div>
+            <div id="numero" class="icone" onclick="clicarNUM('9')">9</div>
+
+            <div id="numero" class="icone" onclick="clicarNUM('2')">2</div>
+            <div id="numero" class="icone" onclick="clicarNUM('3')">3</div>
+            <div id="numero" class="icone" onclick="clicarNUM('4')">4</div>
+            <div id="numero" class="icone" onclick="clicarNUM('5')">5</div>
+
+            <div id="numero" class="icone" onclick="clicarNUM('1')">1</div>
+            <div id="numero" class="icone" onclick="clicarNUM('0')">0</div>
+            <div id="apagar" class="icone" onclick="apagar()">AC</div>
+            <div id="calcular" class="icone" onclick="calcular()">=</div>
+          
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <script>
+      let numAnterio = ""
+      let numAtual = ""
+      let operador = ""
+      var resposta = window.document.getElementById("resposta")
+
+      function clicarNUM(digito){
+        numAtual += digito
+        resposta.innerText = operador ? `${numAnterio}${operador}${numAtual}` : numAtual
+      }
+
+      function clicarOP(op){
+        if(!numAtual) return;
+        numAnterio = numAtual
+        numAtual = ''
+        operador = op
+        resposta.innerText = `${numAnterio}${operador}`
+      }
+      function calcular(){
+        if(!numAnterio || !operador || !numAtual) return;
+        var a = Number(numAnterio)
+        var b = Number(numAtual)
+        var resultado = ""
+
+        if(operador === '+'){
+          resultado = a + b
+        }
+        else if( operador === "-"){
+          resultado = a - b
+        }
+        else if( operador === "X"){
+          resultado = a * b
+        }
+        else if( operador === "/"){
+          resultado = b !== 0 ? a/b : 'ERROR'
+        }
+        resposta.innerText = resultado
+        numAnterio = String(resultado)
+        numAtual = ""
+        operador = ""
+      }
+      function apagar(){
+        numAnterio = ""
+        operador = ""
+        numAtual = ""
+        resposta.innerHTML = ""
+      }
+      
+      
+    </script>
+  </body>
+</html>
